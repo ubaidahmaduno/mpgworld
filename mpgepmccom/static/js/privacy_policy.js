@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",()=>{let e=document.getElementById("nav-toggle"),t=document.getElementById("nav-content");e&&e.addEventListener("click",()=>{t.classList.toggle("is-open")})});

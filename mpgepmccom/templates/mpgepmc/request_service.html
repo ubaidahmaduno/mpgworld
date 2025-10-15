@@ -1,0 +1,23 @@
+{% extends 'mpgepmc/base.html' %} {% load static %} {% block title %}Request Services{% endblock %} {% block extra_head %}
+<link rel=stylesheet href="{% static 'css/request_service.css'%}">
+{% endblock %} {% block content %}
+<div class=page-container>
+<header class=service-request-hero>
+<h1>Request: {{ service.name }}</h1>
+<p>{{ service.short_description|default:"Let's start the conversation about your project." }}</p>
+</header>
+<section class=form-section>
+<div class=form-container>
+<h2>Provide Your Details</h2>
+<form method=post class=request-form>
+{% csrf_token %} {% for field in form %}
+<div class=form-group>
+{{ field.label_tag }} {{ field }} {% if field.help_text %}<small class=form-help-text>{{ field.help_text }}</small>{% endif %} {% for error in field.errors %}<span class=form-error>{{ error }}</span>{% endfor %}
+</div>
+{% endfor %}
+<button type=submit class=submit-button>Submit Your Request</button>
+</form>
+</div>
+</section>
+</div>
+{% endblock %}

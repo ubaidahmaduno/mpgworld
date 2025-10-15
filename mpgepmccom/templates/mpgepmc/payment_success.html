@@ -1,0 +1,10 @@
+{% extends 'mpgepmc/base.html' %} {% load static %}
+{% block title %}Payment Success{% endblock %} {% block content %}
+<link rel=stylesheet href="{% static 'css/payment_success.css' %}">
+<div class=payment-success-container>
+<div class=icon-success>✔</div>
+<h1>Payment Successful!</h1>
+<p>Thank you for your purchase! A confirmation email with your order details has been sent to your inbox.</p>
+<a href="{% url 'mpgepmc_core:home' %}" class=back-home-button>Back to Home</a>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head><title>Update on Your Donation</title></head>
+<body>
+    <h2>An Update on Your MPG EPMC Donation</h2>
+    <p>Dear {{ donation.full_name }},</p>
+    <p>We're writing to you regarding the donation verification you submitted. Unfortunately, we were unable to confirm the transaction with the details provided.</p>
+    <hr>
+    <h3>Donation Summary:</h3>
+    <ul>
+        <li><strong>Order Number:</strong> {{ donation.donation_order_number }}</li>
+        <li><strong>Amount:</strong> PKR{{ donation.amount }}</li>
+        <li><strong>Status:</strong> <strong style="color: red;">Failed/Unconfirmed</strong></li>
+    </ul>
+    <hr>
+    <p>This may be due to a simple error in the transaction ID or other details. Please don't worry. Our support team is here to help.</p>
+    <p>Please contact us at <a href="mailto:{{ settings.DEFAULT_FROM_EMAIL }}">{{ settings.DEFAULT_FROM_EMAIL }}</a> and reference your donation order number so we can resolve this issue together.</p>
+    <br>
+    <p>Sincerely,</p>
+    <p>The MPG EPMC Team</p>
+</body>
+</html>

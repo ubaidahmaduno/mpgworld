@@ -1,0 +1,17 @@
+{% extends 'mpgepmc/base.html' %} {% load static %} {% block title %}Thank You For Contacting Us{% endblock %} {% block extra_head %}
+<link rel=stylesheet href="{% static 'css/thank_you.css' %}">
+{% endblock %} {% block content %}
+<div class=thank-you-page-hero>
+<div class=thank-you-card>
+<div class=thank-you-icon>
+<svg xmlns=http://www.w3.org/2000/svg width=40 height=40 viewBox="0 0 24 24" fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+</div>
+<h1>Thank You!</h1>
+<p>Your message has been received successfully. We appreciate you reaching out to us. Our team will review your inquiry and get back to you as soon as possible.</p>
+<div class=thank-you-actions>
+<a href="{% url 'mpgepmc_core:services' %}" class="thank-you-button secondary">Explore Services</a>
+<a href="{% url 'mpgepmc_core:blogs' %}" class="thank-you-button primary">Read Our Blog</a>
+</div>
+</div>
+</div>
+{% endblock %}

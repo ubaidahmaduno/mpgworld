@@ -1,0 +1,92 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPG epmc {% block title %}{% endblock %}</title>
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <nav id="main-nav" role="navigation">
+        <a href="{% url 'mpgepmc_core:home' %}" class="nav-brand" style="text-decoration:none">
+            <div class="nav-logo">
+                <img src="{% static 'img/logo.png' %}" alt="MPGEPMC Logo">
+            </div>
+            <div class="nav-title">MPGEPMC</div>
+        </a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+            &#9776;
+        </button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="{% url 'mpgepmc_core:home' %}">Home</a></li>
+            <li><a href="{% url 'mpgepmc_core:home' %}#about-us">About</a></li>
+            <li><a href="{% url 'mpgepmc_core:services' %}">Services</a></li>
+            <li><a href="{% url 'mpgepmc_core:projects' %}">Projects</a></li>
+            <li><a href="{% url 'mpgepmc_core:blogs' %}">Blog</a></li>
+            <li><a href="{% url 'mpgepmc_core:contact' %}">Contact</a></li>
+            <li><a href="{% url 'mpgepmc_core:support' %}" class="nav-cta">Support us</a></li>
+        </ul>
+    </nav>
+    <main style="flex: 1 0 auto;">
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="professional-footer">
+        <div class="footer-grid">
+            <div class="footer-column">
+                <h3 class="footer-logo-title">MPG epmc</h3>
+                <p>Pioneering the future of business with intelligent digital solutions. We architect growth and competitive advantage through cutting-edge AI and bespoke services.</p>
+            </div>
+            <div class="footer-column">
+                <h4 class="column-title">Quick Links</h4>
+                <ul>
+                    <li><a href="{% url 'mpgepmc_core:home' %}">Home</a></li>
+                    <li><a href="{% url 'mpgepmc_core:services' %}">Services</a></li>
+                    <li><a href="{% url 'mpgepmc_core:blogs' %}">Blog</a></li>
+                    <li><a href="{% url 'mpgepmc_core:contact' %}">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4 class="column-title">Our Services</h4>
+                <ul>
+                    {% for service in latest_services_footer %}
+                        <li><a href="{% url 'mpgepmc_core:service_detail' service_slug=service.slug %}">{{ service.name }}</a></li>
+                    {% empty %}
+                        <li><a href="{% url 'mpgepmc_core:services' %}">View All Services</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4 class="column-title">Insights</h4>
+                <ul>
+                    {% for blog in latest_blogs_footer %}
+                        <li><a href="{% url 'mpgepmc_core:blog_detail' blog.slug %}">{{ blog.title|truncatechars:35 }}</a></li>
+                    {% empty %}
+                        <li><a href="{% url 'mpgepmc_core:blogs' %}">Visit Our Blog</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4 class="column-title">Contact Us</h4>
+                <p>
+                    <strong>Email:</strong> <a href="mailto:info@mpgepmc.com" style="color:var(--secondary-color);">info@mpgepmc.com</a>
+                </p>
+            </div>
+        </div>
+        <div class="sub-footer">
+            <div class="sub-footer-container">
+                <p>&copy; {% now "Y" %} MPG epmc. All Rights Reserved.</p>
+                <div class="sub-footer-links">
+                    <a href="{% url 'mpgepmc_core:privacy_policy' %}">Privacy Policy</a>
+                    <a href="{% url 'mpgepmc_core:terms_and_conditions' %}">Terms & Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'js/base.js'%}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

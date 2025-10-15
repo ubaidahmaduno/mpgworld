@@ -1,0 +1,126 @@
+{% extends 'mpgepmc/base.html' %}
+{% load static %}
+
+{% block title %}
+    Support Our Mission | Step 1
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/support_initial.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="donation-page-container">
+    <div class="container">
+        
+        <div class="donation-header">
+            <h1>Your Support Matters</h1>
+            <p>Fuel our work in AI development and human welfare. Your contribution, big or small, makes a world of difference.</p>
+        </div>
+
+        <div class="stepper-wrapper">
+            <div class="stepper-item active">
+                <div class="step-counter">1</div>
+                <div class="step-name">Amount</div>
+            </div>
+            <div class="stepper-item">
+                <div class="step-counter">2</div>
+                <div class="step-name">Verify</div>
+            </div>
+            <div class="stepper-item">
+                <div class="step-counter">3</div>
+                <div class="step-name">Success</div>
+            </div>
+        </div>
+
+        <div class="donation-card">
+            <form id="donation-start-form" method="POST" action="{% url 'mpgepmc_core:support' %}">
+                {% csrf_token %}
+                
+                {% if form.non_field_errors %}
+                    <div class="form-error">{{ form.non_field_errors.0 }}</div>
+                {% endif %}
+                
+                <div class="form-section">
+                    <div class="amount-input-wrapper">
+                        <label for="{{ form.amount.id_for_label }}" class="amount-input-label">I would like to donate</label>
+                        <div class="custom-input-group">
+                            <span class="currency-symbol">PKR</span>
+                            {{ form.amount }}
+                        </div>
+                    </div>
+                    {% if form.amount.errors %}
+                        <span class="error-feedback">{{ form.amount.errors.0 }}</span>
+                    {% endif %}
+                </div>
+                
+                <hr class="section-divider">
+
+                <div class="form-section">
+                    <h3 class="form-section-title">How would you like to give?</h3>
+                    <div class="payment-options-grid">
+                        {% for radio in form.payment_method %}
+                            <label class="payment-option {% if radio.choice_label != 'Direct Bank Transfer' %}disabled{% endif %}">
+                                {{ radio.tag }}
+                                <div class="option-card">
+                                    <div class="icon">
+                                        {% if radio.choice_label == 'Direct Bank Transfer' %}<i class="fas fa-university"></i>
+                                        {% elif radio.choice_label == 'PayPal' %}<i class="fab fa-paypal"></i>
+                                        {% else %}<i class="fas fa-credit-card"></i>{% endif %}
+                                    </div>
+                                    <div class="details">
+                                        <span class="title">{{ radio.choice_label }}</span>
+                                        <div class="description">
+                                            {% if radio.choice_label == 'Direct Bank Transfer' %}
+                                                Transfer directly from your bank account.
+                                            {% else %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div id="security-info">
+                    <div class="icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="info-text">
+                        <h4>Secure Payment Processor</h4>
+                        <p class="policy-text">
+                            We use a trusted and secure banking partner to process your transaction. Your payment details are handled with bank-level security.
+                        </p>
+                        
+                        <h4>Important Notes:</h4>
+                        <ul>
+                            <li>Please double-check the donation amount before proceeding.</li>
+                            <li>You will be redirected to our bank's details page to complete the transfer.</li>
+                            <li>A confirmation receipt will be sent to your email after verification.</li>
+                        </ul>
+                        
+                        <p class="policy-text">
+                            By clicking "Proceed", you agree to our 
+                            <a href="{% url 'mpgepmc_core:terms_and_conditions' %}" target="_blank">Terms & Conditions</a> and 
+                            <a href="{% url 'mpgepmc_core:privacy_policy' %}" target="_blank">Data Privacy Policy</a>.
+                        </p>
+                    </div>
+                </div>
+                <button type="submit" id="proceed-button" class="submit-button">
+                    Proceed to Donation <i class="fas fa-arrow-right icon"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="{%static 'js/support_initial.js'%}"></script>
+{% endblock %}

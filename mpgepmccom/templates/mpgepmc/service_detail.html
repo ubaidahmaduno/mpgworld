@@ -1,0 +1,53 @@
+{% extends 'mpgepmc/base.html' %} {% load static %} {% block title %}{{ service.name }}{% endblock %} {% block extra_head %}
+<link rel=stylesheet href="{% static 'css/service_detail.css'%}">
+{% endblock %} {% block content %}
+<div class=page-container>
+<header class=service-detail-header-v3 {% if service.image %}style="background-image: url('{{ service.image.url }}');" {% endif %}>
+<div class=header-text-v3>
+<h1>{{ service.name }}</h1>
+<p class=lead-text>{{ service.short_description|default:"Unlocking potential through cutting-edge solutions. Explore what we offer." }}</p>
+</div>
+</header>
+<main class=content-wrapper>
+<section class=service-full-description style="padding:80px 20px">
+{{ service.full_description|safe }}
+</section>
+</main>
+{% if service.has_packages_for_purchase %}
+<div class=packages-section-v3>
+<div class=content-wrapper>
+<h2 class=section-title>Find Your Perfect Plan</h2>
+<p class=section-subtitle>Choose the package that best fits your needs and project goals.</p>
+<div class=package-cards-grid-v3>
+{% for package in packages %}
+<div class="package-card-v3 {% if forloop.counter == 2 %}highlight{% endif %}">
+<h3>{{ package.name }}</h3>
+<p class=package-description-v3>{{ package.description|safe }}</p>
+<div class=package-price-v3>
+<sup>$</sup>{{ package.price|floatformat:0 }}
+<span class=duration>/ {{ package.duration|default:"One Time" }}</span>
+</div>
+<ul class=package-features-v3>
+{% for feature in package.features.all %}
+<li>{{ feature.feature_text|safe }}</li>
+{% empty %}
+<li>All essential features included.</li>
+{% endfor %}
+</ul>
+<a href="{% url 'mpgepmc_core:checkout' package_slug=package.slug %}" class=package-buy-button-v3>Choose Plan</a>
+</div>
+{% endfor %}
+</div>
+</div>
+</div>
+{% else %}
+<div class=content-wrapper>
+<section class=no-packages-cta>
+<h3 style=color:var(--text-dark)>Bespoke Solutions Await</h3>
+<p>Contact us for a personalized consultation and quote.</p>
+<a href="{% url 'mpgepmc_core:request_service' service_slug=service.slug %}" class="action-button primary">Request a Quote</a>
+</section>
+</div>
+{% endif %}
+</div>
+{% endblock %}

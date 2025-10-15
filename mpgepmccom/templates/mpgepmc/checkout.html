@@ -1,0 +1,35 @@
+{% extends 'mpgepmc/base.html' %} {% load static %}
+{% block title %}Checkout{% endblock %} {% block extra_head %}
+<link rel=stylesheet href="{% static 'css/checkout.css' %}">
+{% endblock %} {% block content %}
+<div class=page-background>
+<div class=checkout-page-container>
+<div class=checkout-header><h1>Secure Checkout</h1></div>
+<div class=checkout-grid>
+<div class=checkout-form-column>
+<form action="{% url 'mpgepmc_core:process_payment' %}" method=post>
+{% csrf_token %}
+<input type=hidden name=package_id_hidden_input value="{{ package.id }}">
+<div class=form-step><h3>Your Information</h3>
+{% for field in form %}
+<div class=form-group>
+{{ field.label_tag }} {{ field }}
+</div>
+{% endfor %}
+</div>
+<div class=form-step><h3>Payment Details</h3>
+<div class=form-group><label for=card-element>Card Details</label><div id=card-element class=form-control></div></div>
+<button type=submit class=payment-button>Pay ${{ package.price|floatformat:2 }}</button>
+</div>
+</form>
+</div>
+<div class=order-summary-column>
+<h2>Order Summary</h2>
+<p><strong>Service:</strong> {{ service.name }}</p>
+<p><strong>Package:</strong> {{ package.name }}</p>
+<div class=summary-total><span class=total-label>Total</span><span class=total-price>${{ package.price|floatformat:2 }}</span></div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

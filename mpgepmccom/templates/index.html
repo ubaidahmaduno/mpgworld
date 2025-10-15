@@ -1,0 +1,124 @@
+{% extends 'mpgepmc/base.html' %} {% load static %} {% block title %}Home{% endblock %} {% block extra_head %}
+<link rel=stylesheet href="{% static 'css/home.css' %}">
+{% endblock %} {% block content %}
+<div class=slider id=slider>
+{% for item in slider_items %} {% if item.name %}
+<div class="slide {% if forloop.first %}active{% endif %}" style="background-image:url('{% if item.image %}{{ item.image.url }}{% else %}{% static 'img/default-service-bg.jpg' %} {% endif %}')">
+<div class=overlay></div>
+<div class=content>
+<h1>{{ item.name }}</h1>
+<p class=slide-summary>{{ item.short_description|default:"Explore our professional services designed for excellence and growth." }}</p>
+<a href="{% url 'mpgepmc_core:service_detail' service_slug=item.slug %}" class=cta-btn>Learn More</a>
+</div>
+</div>
+{% else %}
+<div class="slide {% if forloop.first %}active{% endif %}" style="background-image:url('{% if item.feature_image %}{{ item.feature_image.url }}{% else %}{% static 'img/default-blog-bg.jpg' %} {% endif %}')">
+<div class=overlay></div>
+<div class=content>
+<h1>{{ item.title }}</h1>
+<p class=slide-summary>{{ item.short_summary|default:"Explore our latest insights and innovations shaping the industry." }}</p>
+<a href="{% url 'mpgepmc_core:blog_detail' item.slug %}" class=cta-btn>Read More</a>
+</div>
+</div>
+{% endif %} {% empty %}
+<div class="slide active" style="background-image:url('{% static 'img/default-hero-bg.jpg' %}')">
+<div class=overlay></div>
+<div class=content>
+<h1>Architecting the Future of Business</h1>
+<p class=slide-summary>We deliver intelligent, scalable, and impactful solutions that drive growth, efficiency, and a distinct competitive advantage for our clients globally.</p>
+<a href="{% url 'mpgepmc_core:services' %}" class=cta-btn>Explore Services</a>
+</div>
+</div>
+{% endfor %}
+<div class=dots id=dots-container></div>
+</div>
+<section id=about-us class=modern-about-section>
+<div class=about-container>
+<div class=about-intro>
+<h2 class=section-title>Our Foundation for Success</h2>
+</div>
+<div class=about-vision-mission>
+<div class=about-block>
+<h3>Our Vision</h3>
+<p>Our vision is to be the world's leading catalyst for digital transformation, pioneering an era where intelligent technology is the cornerstone of every successful enterprise. We envision a future where businesses of all scales can leverage the full potential of AI to innovate, optimize, and redefine the boundaries of their respective industries, creating unprecedented growth and opportunity.</p>
+</div>
+<div class=about-block>
+<h3>Our Mission</h3>
+<p>Our mission is to empower organizations by engineering cutting-edge, AI-powered solutions and providing comprehensive digital services. We are passionately committed to translating complex challenges into strategic advantages through deep industry expertise, technological excellence, and a relentless dedication to our clients' success. We build not just solutions, but lasting partnerships founded on trust, integrity, and the delivery of measurable outcomes.</p>
+</div>
+</div>
+<div class=why-us-section>
+<h3 class=why-us-title>Why Partner With Us</h3>
+<div class=features-grid>
+<div class=feature-card>
+<div class=feature-icon>
+<svg xmlns=http://www.w3.org/2000/svg fill=none viewBox="0 0 24 24" stroke-width=1.5 stroke=currentColor><path stroke-linecap=round stroke-linejoin=round d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.311a7.5 7.5 0 01-7.5 0c-1.421-.492-2.682-.998-3.624-1.533a1.125 1.125 0 01-.44-1.265L6.75 12a1.125 1.125 0 01.622-.832l5.25-3a1.125 1.125 0 011.246 0l5.25 3a1.125 1.125 0 01.622.832l.25 5.03a1.125 1.125 0 01-.44 1.265c-.942.535-2.203 1.041-3.624 1.533z"/></svg>
+</div>
+<h4>Pioneering Expertise</h4>
+<p>Our team possesses profound expertise in AI and digital services. We don't just follow trends; we set them.</p>
+</div>
+<div class=feature-card>
+<div class=feature-icon>
+<svg xmlns=http://www.w3.org/2000/svg fill=none viewBox="0 0 24 24" stroke-width=1.5 stroke=currentColor><path stroke-linecap=round stroke-linejoin=round d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"/></svg>
+</div>
+<h4>Strategic Partnership Model</h4>
+<p>We operate as a true strategic partner invested in understanding your unique goals and co-creating a roadmap for success.</p>
+</div>
+<div class=feature-card>
+<div class=feature-icon>
+<svg xmlns=http://www.w3.org/2000/svg fill=none viewBox="0 0 24 24" stroke-width=1.5 stroke=currentColor><path stroke-linecap=round stroke-linejoin=round d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 066 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>
+</div>
+<h4>Bespoke & Scalable Solutions</h4>
+<p>Every solution is meticulously tailored to your specific needs, designed for scalability and long-term value.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class=services-section id=services>
+<h2 class=section-title>Our Core Offerings</h2>
+<p class=section-description>
+Our comprehensive suite of services is designed to meet your business needs, from ideation to implementation and beyond.
+</p>
+<div class=service-cards-container>
+{% for service in featured_services %}
+<a href="{% url 'mpgepmc_core:service_detail' service_slug=service.slug %}" class=card-link>
+<div class=service-card>
+<h3 class=card-title>{{ service.name }}</h3>
+<p class=card-description>{{ service.short_description|truncatewords:20|default:"Explore our professional services designed for excellence and growth." }}</p>
+<span class=card-button>Learn More</span>
+</div>
+</a>
+{% empty %}
+<div class=service-card><h3 class=card-title>No featured services available.</h3></div>
+{% endfor %}
+</div>
+</section>
+<section class=blog-posts-section id=blog>
+<h2 class=section-title>Latest Articles</h2>
+<p class=section-description>
+Explore expert articles, trends, and strategies shaping the digital landscape.
+</p>
+<div class=blog-grid>
+{% for blog in latest_blogs %}
+<a href="{% url 'mpgepmc_core:blog_detail' blog.slug %}" class=card-link>
+<div class=blog-card>
+<div class=blog-card-image-wrapper>
+<img src="{% if blog.feature_image %}{{ blog.feature_image.url }}{% else %}{% static 'img/default-blog-card.png' %}{% endif %}" alt="{{ blog.title }}" class=blog-card-image>
+</div>
+<div class=blog-card-content>
+<div class=blog-card-meta><span class=date>{{ blog.posted_date|date:"F j, Y" }}</span></div>
+<h3>{{ blog.title }}</h3>
+<p>{{ blog.short_summary|truncatewords:15|default:"No summary provided." }}</p>
+<span class=card-button>Read Article</span>
+</div>
+</div>
+</a>
+{% empty %}
+<div class=service-card><h3 class=card-title>No recent blog posts.</h3></div>
+{% endfor %}
+</div>
+</section>
+{% endblock %} {% block extra_js %}
+<script src="{%static 'js/home.js'%}"></script>
+{% endblock %}

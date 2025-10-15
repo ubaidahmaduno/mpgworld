@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head><title>New Donation Verification</title></head>
+<body>
+    <h2>Action Required: New Donation Verification Submitted</h2>
+    <p>A user has submitted verification details for a donation. Please review the information below and in the admin panel to confirm the transaction.</p>
+    <hr>
+    <h3>Donation Details:</h3>
+    <ul>
+        <li><strong>Order Number:</strong> {{ donation.donation_order_number }}</li>
+        <li><strong>Amount:</strong> PKR{{ donation.amount }}</li>
+        <li><strong>Donor Name:</strong> {{ donation.full_name }}</li>
+        <li><strong>Donor Email:</strong> {{ donation.email }}</li>
+        <li><strong>Transaction ID:</strong> {{ donation.transaction_id }}</li>
+        <li><strong>Sender Account Name:</strong> {{ donation.sender_account_name|default:'N/A' }}</li>
+        <li><strong>Sender Account Number:</strong> {{ donation.sender_account_number|default:'N/A' }}</li>
+    </ul>
+    <p>A transaction slip has been uploaded and can be viewed in the Django Admin.</p>
+    <hr>
+    <p>Please log in to the admin dashboard to mark this donation as 'Completed' once the funds are confirmed in the bank account.</p>
+</body>
+</html>

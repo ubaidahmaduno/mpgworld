@@ -1,0 +1,35 @@
+{% extends 'mpgepmc/base.html' %} {% load static %} {% block title %}Our Solutions{% endblock %} {% block extra_head %}
+<link rel=stylesheet href="{% static 'css/services.css' %}">
+{% endblock %} {% block content %}
+<header class=services-hero-v2>
+<h1>Our Suite of Solutions</h1>
+<p class=lead-text>
+Architecting success through innovation. We deliver bespoke, AI-powered solutions and strategic digital services designed to elevate your business.
+</p>
+</header>
+<div class=service-grid-container>
+<div class=grid-title>
+<h2>Explore Our Services</h2>
+</div>
+<div class=modern-services-grid>
+{% for service in services %}
+<a href="{% url 'mpgepmc_core:service_detail' service_slug=service.slug %}" class=service-card-v3>
+<img src="{% if service.image %}{{ service.image.url }}{% else %}{% static 'img/default-service-card.jpg' %}{% endif %}" alt="{{ service.name }}" class=card-bg-image>
+<div class=card-overlay></div>
+<div class=card-content>
+<h3>{{ service.name }}</h3>
+<p>{{ service.short_description|truncatewords:20|default:"A comprehensive solution tailored for your needs." }}</p>
+<span class=card-explore-link>
+Explore Service <svg width=18 height=18 viewBox="0 0 24 24" fill=none xmlns=http://www.w3.org/2000/svg>
+<path d="M5 12H19" stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round />
+<path d="M12 5L19 12L12 19" stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round />
+</svg>
+</span>
+</div>
+</a>
+{% empty %}
+<p class=no-services-message>No services are currently listed. Please check back later.</p>
+{% endfor %}
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'mpgepmc/base.html' %} {% load static %} {% block title %}{{ blog_post.title }}{% endblock %} {% block extra_head %}
+<link rel=stylesheet href="{%static 'css/blog_detail.css'%}">
+{% endblock %} {% block content %}
+<article>
+<header class=article-hero>
+{% if blog_post.feature_image %}
+<img src="{{ blog_post.feature_image.url }}" alt="" class=article-hero-bg>
+{% endif %}
+<div class=article-header>
+<p class=article-meta>
+Published on {{ blog_post.posted_date|date:"F j, Y" }}
+</p>
+<h1>{{ blog_post.title }}</h1>
+</div>
+</header>
+<div class=article-container>
+<div class=article-content>
+{{ blog_post.content|safe }}
+</div>
+<div class=post-navigation-buttons aria-label="Blog post navigation">
+{% if previous_post %}
+<a href="{% url 'mpgepmc_core:blog_detail' previous_post.slug %}" class="nav-button prev">
+<span>&larr;</span> Previous
+</a>
+{% else %}
+<span class="nav-button disabled"><span>&larr;</span> Previous</span>
+{% endif %}
+<a href="{% url 'mpgepmc_core:blogs' %}" class="nav-button nav-button-center">All Articles</a>
+{% if next_post %}
+<a href="{% url 'mpgepmc_core:blog_detail' next_post.slug %}" class="nav-button next">
+Next <span>&rarr;</span>
+</a>
+{% else %}
+<span class="nav-button disabled">Next <span>&rarr;</span></span>
+{% endif %}
+</div>
+</div>
+</article>
+{% if related_posts %}
+<section class=related-posts-section>
+<div class=related-container>
+<h3 class=related-title>You Might Also Like</h3>
+<div class=related-grid>
+{% for post in related_posts %}
+<a href="{% url 'mpgepmc_core:blog_detail' post.slug %}" class=related-card>
+<div class=related-card-img-wrapper>
+<img src="{% if post.feature_image %}{{ post.feature_image.url }}{% else %}{% static 'img/default-blog-card.png' %}{% endif %}" alt="{{ post.title }}" class=related-card-img>
+</div>
+<div class=related-card-content>
+<h4>{{ post.title }}</h4>
+</div>
+</a>
+{% endfor %}
+</div>
+</div>
+</section>
+{% endif %} {% endblock %}

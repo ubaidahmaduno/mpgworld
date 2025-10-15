@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head><title>Your Donation is Complete!</title></head>
+<body>
+    <h2>Thank You! Your Donation is Confirmed!</h2>
+    <p>Dear {{ donation.full_name }},</p>
+    <p>We are delighted to inform you that we have successfully received and confirmed your generous donation. Your support is vital to our mission of advancing AI and promoting human welfare.</p>
+    <hr>
+    <h3>Final Donation Summary:</h3>
+    <ul>
+        <li><strong>Order Number:</strong> {{ donation.donation_order_number }}</li>
+        <li><strong>Amount:</strong> PKR{{ donation.amount }}</li>
+        <li><strong>Status:</strong> <strong style="color: green;">Completed</strong></li>
+    </ul>
+    <hr>
+    <p>Every contribution makes a real difference, and we are incredibly grateful for yours. Thank you for being a part of the MPG EPMC community.</p>
+    <br>
+    <p>Sincerely,</p>
+    <p>The MPG EPMC Team</p>
+</body>
+</html>

@@ -1,0 +1,52 @@
+{% extends 'mpgepmc/base.html' %} {% load static %} {% block title %}Blog | Our Insights{% endblock %} {% block extra_head %}
+<link rel=stylesheet href="{% static 'css/blogs.css' %}">
+{% endblock %} {% block content %}
+<header class=blog-hero-v2>
+<h1>Our Insights & Perspectives</h1>
+<p class=lead-text>Dive into a world of innovation with expert articles, industry analysis, and our vision for the future.</p>
+</header>
+<div class=blog-layout-container>
+{% if blog_posts %} {# --- IMMERSIVE FEATURED POST (Latest Post) --- #} {% with featured_post=blog_posts.0 %}
+<section>
+<a href="{% url 'mpgepmc_core:blog_detail' featured_post.slug %}" style=text-decoration:none>
+<div class=featured-post-section-v2>
+<img src="{% if featured_post.feature_image %}{{ featured_post.feature_image.url }}{% else %}{% static 'img/default-blog-bg.jpg' %}{% endif %}" alt="{{ featured_post.title }}" class=featured-image-bg>
+<div class=featured-content-overlay>
+<p class=card-meta>Featured Article &bull; {{ featured_post.posted_date|date:"F j, Y" }}</p>
+<h2 class=card-title>{{ featured_post.title }}</h2>
+<p class=card-excerpt>{{ featured_post.short_summary|truncatewords:25|default:"No summary available." }}</p>
+<span class=read-more-btn>Read Full Story</span>
+</div>
+</div>
+</a>
+</section>
+{% endwith %} {# --- MODERN BLOG GRID (Older Posts) --- #}
+<section style=margin-top:80px>
+<h2 class=section-heading>More Articles</h2>
+<div class=blog-posts-grid-v2>
+{% for blog in blog_posts|slice:"1:" %}
+<a href="{% url 'mpgepmc_core:blog_detail' blog.slug %}" class=blog-card-v2>
+<div class=card-image-wrapper>
+<img src="{% if blog.feature_image %}{{ blog.feature_image.url }}{% else %}{% static 'img/default-blog-card.png' %}{% endif %}" alt="{{ blog.title }}" class=card-image>
+</div>
+<div class=card-content>
+<div class=card-tags>
+<span class=tag>Insights</span>
+</div>
+<h3 class=card-title>{{ blog.title }}</h3>
+<div class=card-footer>
+<span class=card-date>{{ blog.posted_date|date:"F d, Y" }}</span>
+<span class=card-read-more-icon>&rarr;</span>
+</div>
+</div>
+</a>
+{% endfor %}
+</div>
+</section>
+{% else %}
+<div style=text-align:center;padding:50px>
+<p style=font-size:1.2rem;color:var(--text-light)>No blog posts are currently published. Please check back soon!</p>
+</div>
+{% endif %}
+</div>
+{% endblock %}
