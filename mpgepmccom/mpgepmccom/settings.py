@@ -12,10 +12,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG =False
 
-ALLOWED_HOSTS = ['8.219.120.135',
-    'mpgepmc.com', 
-    'www.mpgepmc.com',
-    'mpgepmc.online',
+ALLOWED_HOSTS = ['mpgepmc.online',
     'www.mpgepmc.online',
 
 ]
